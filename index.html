@@ -1,65 +1,87 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Benim Galerim</title>
-<style>
-    body {
-        margin: 0;
-        background: #f5f0e8;
-        font-family: Georgia, serif;
-    }
-    .gallery {
-        position: relative;
-        width: 100%;
-        min-height: 100vh;
-        overflow: hidden;
-    }
-    .photo {
-        position: absolute;
-        width: 180px;
-        cursor: pointer;
-        transition: transform 0.3s ease;
-    }
-    .photo img {
-        width: 100%;
-        display: block;
-        border: 8px solid white;
-        box-sizing: border-box;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-    .photo:active {
-        transform: scale(0.95);
-    }
-    .photo:nth-child(1) {
-        top: 15%;
-        left: 15%;
-        transform: rotate(-7deg);
-    }
-    @media (max-width: 600px) {
+
+    <style>
+        body {
+            margin: 0;
+            background: #f5f0e8;
+            font-family: Georgia, serif;
+        }
+
+        .gallery {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
         .photo {
-            width: 140px;
+            position: absolute;
+            width: 180px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
         }
-    }
-</style>
+
+        .photo img {
+            width: 100%;
+            display: block;
+            border: 8px solid white;
+            box-sizing: border-box;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .photo:active {
+            transform: scale(0.95);
+        }
+
+        .photo:nth-child(1) {
+            top: 15%;
+            left: 15%;
+            transform: rotate(-7deg);
+        }
+
+        @media (max-width: 600px) {
+            .photo {
+                width: 140px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-<div class="gallery">
-<div class="photo" onclick="playSound()">
-    <img src="images/foto1.jpg" alt="Fotoğraf">
-</div>
-</div>
-<script>
-    function playSound() {
-        const sound = document.getElementById("sound");
-        if (sound.paused) {
-            sound.play();
-        } else {
-            sound.pause();
-            sound.currentTime = 0;
+
+    <div class="gallery">
+
+        <div class="photo" onclick="playSound()">
+            <img src="images/foto1.jpg" alt="Fotoğraf">
+        </div>
+
+    </div>
+
+    <!-- SES DOSYASI -->
+    <audio id="sound" src="audio/ses1.mp3" preload="auto"></audio>
+
+    <script>
+        function playSound() {
+
+            const sound = document.getElementById("sound");
+
+            if (sound.paused) {
+                sound.play().catch(error => {
+                    console.log("Ses oynatılamadı:", error);
+                });
+            } else {
+                sound.pause();
+                sound.currentTime = 0;
+            }
+
         }
-    }
-</script>
+    </script>
+
 </body>
 </html>
